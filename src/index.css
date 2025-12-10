@@ -1,0 +1,33 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* นำเข้า Font Prompt และ Sarabun */
+@import url('https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;600;700&family=Sarabun:wght@300;400;500;600&display=swap');
+
+/* ตั้งค่า Font เริ่มต้น */
+body {
+  font-family: 'Sarabun', sans-serif;
+  background-color: #141419; /* สีพื้นหลังหลักของ App คุณ */
+  color: white;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Prompt', sans-serif;
+}
+
+/* ปรับ Scrollbar ให้สวยงาม (ตามสไตล์ Dark Mode) */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #4B5563;
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #6B7280;
+}
