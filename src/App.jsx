@@ -15,7 +15,7 @@ const {
 
 // ==========================================
 // ZONE A: SSOT (Single Source of Truth)
-// Mock Data, Constants, and Configs test
+// Mock Data, Constants, and Configs
 // ==========================================
 
 const FONTS = {
@@ -47,6 +47,22 @@ const PetProductsDB = [
   { id: 'P010', sku: 'B-055', barcode: '8856677889900', name: 'เบาะนอนสุนัข นุ่มพิเศษ L', brand: 'Sleepy Pet', supplier: 'Pet Bed Factory', category: 'Accessory', subCategory: 'Bedding', stock: 5, stockPolicy: { min: 3, max: 15 }, unit: 'ชิ้น', price: 890, cost: 500, shelfLife: '-', animal: 'dog', img: '🛏️' },
 ];
 
+// --- MARKETPLACE SPECIFIC DATA ---
+const MARKETPLACE_BANNERS = [
+  { id: 1, title: 'Royal Canin Super Brand Day', sub: 'ลดต้นทุนสูงสุด 15% เมื่อสั่งยกลัง', color: 'bg-gradient-to-r from-red-600 to-red-400', icon: '👑' },
+  { id: 2, title: 'New Arrival: Tech Toys', sub: 'ของเล่นอัจฉริยะนำเข้าจากญี่ปุ่น กำไรดี', color: 'bg-gradient-to-r from-blue-600 to-indigo-400', icon: '🤖' },
+  { id: 3, title: 'Summer Collection Sale', sub: 'เสื้อผ้าสัตว์เลี้ยงรับหน้าร้อน เริ่มต้น ฿40', color: 'bg-gradient-to-r from-orange-500 to-yellow-400', icon: '☀️' },
+];
+
+const MARKETPLACE_CATEGORIES = [
+  { id: 'all', name: 'ทั้งหมด', icon: '🏢' },
+  { id: 'best', name: 'ขายดี', icon: '🔥' },
+  { id: 'new', name: 'มาใหม่', icon: '✨' },
+  { id: 'food', name: 'อาหารสัตว์', icon: '🍖' },
+  { id: 'med', name: 'เวชภัณฑ์', icon: '💉' },
+  { id: 'acc', name: 'อุปกรณ์', icon: '🧶' },
+];
+
 const PetsDB = [
   { id: 'PET001', name: 'หมูตุ๋น', gender: 'Male', weight: 28.5, birthYear: 2020, type: 'dog', breed: 'Golden Retriever', chronicDiseases: ['โรคข้อสะโพก'], ownerName: 'คุณ สมชาย ใจดี', phone: '081-111-1111', lineId: '@somchai' },
   { id: 'PET002', name: 'มาร์นี่', gender: 'Female', weight: 4.2, birthYear: 2021, type: 'cat', breed: 'Persian', chronicDiseases: ['ทำหมันแล้ว'], ownerName: 'คุณ วิภา รักสัตว์', phone: '089-222-2222', lineId: '@vipa_cat' },
@@ -61,13 +77,13 @@ const PetsDB = [
 ];
 
 const INITIAL_MEMBERS_DB = [
-  { id: '0812345678', name: 'คุณ สมศรี รักสัตว์', phone: '081-234-5678', level: 'ก๊วนเพื่อนซี้', levelColor: 'bg-purple-100 text-purple-600', points: 1325, pets: ['dog'], line: true, theme: 'amber', visits: 1 },
-  { id: '0823456789', name: 'คุณ บี', phone: '082-345-6789', level: 'ครอบครัวขนฟู', levelColor: 'bg-green-100 text-green-600', points: 8536, pets: ['dog', 'cat', 'rabbit'], line: true, theme: 'purple', visits: 5 },
-  { id: '0834567890', name: 'คุณ บาส', phone: '083-456-7890', level: 'คู่หูขนฟู', levelColor: 'bg-blue-100 text-blue-600', points: 9988, pets: ['dog'], line: true, theme: 'blue', visits: 8 },
-  { id: '0845678901', name: 'คุณ แป้ง', phone: '084-567-8901', level: 'คู่หูขนฟู', levelColor: 'bg-blue-100 text-blue-600', points: 8988, pets: ['cat'], line: true, theme: 'pink', visits: 12 },
-  { id: '0856789012', name: 'คุณ เอ', phone: '085-678-9012', level: 'คู่หูขนฟู', levelColor: 'bg-blue-100 text-blue-600', points: 9033, pets: ['dog', 'cat'], line: true, theme: 'indigo', visits: 3 },
-  { id: '0878901234', name: 'คุณ มารวย', phone: '087-890-1234', level: 'ผู้พิทักษ์', levelColor: 'bg-gray-100 text-gray-600', points: 250, pets: ['fish'], line: true, theme: 'amber', visits: 0 },
-  { id: '0889012345', name: 'คุณ จอย', phone: '088-901-2345', level: 'ก๊วนเพื่อนซี้', levelColor: 'bg-purple-100 text-purple-600', points: 500, pets: ['bird'], line: false, theme: 'green', visits: 2 },
+  { id: '0811111111', name: 'คุณ สมชาย ใจดี', phone: '081-111-1111', level: 'ก๊วนเพื่อนซี้', levelColor: 'bg-purple-100 text-purple-600', points: 1500, pets: ['dog', 'dog'], petIds: ['PET001', 'PET009'], line: true, theme: 'amber', visits: 12 },
+  { id: '0892222222', name: 'คุณ วิภา รักสัตว์', phone: '089-222-2222', level: 'ครอบครัวขนฟู', levelColor: 'bg-green-100 text-green-600', points: 4500, pets: ['cat', 'cat'], petIds: ['PET002', 'PET010'], line: true, theme: 'pink', visits: 8 },
+  { id: '0834567890', name: 'คุณ บาส', phone: '083-456-7890', level: 'คู่หูขนฟู', levelColor: 'bg-blue-100 text-blue-600', points: 9988, pets: ['dog'], petIds: ['PET003'], line: false, theme: 'blue', visits: 8 },
+  { id: '0889012345', name: 'คุณ จอย', phone: '088-901-2345', level: 'ก๊วนเพื่อนซี้', levelColor: 'bg-purple-100 text-purple-600', points: 500, pets: ['rabbit', 'bird'], petIds: ['PET004', 'PET008'], line: true, theme: 'green', visits: 2 },
+  { id: '0856789012', name: 'คุณ เอ', phone: '085-678-9012', level: 'คู่หูขนฟู', levelColor: 'bg-blue-100 text-blue-600', points: 9033, pets: ['dog'], petIds: ['PET005'], line: true, theme: 'indigo', visits: 3 },
+  { id: '0845678901', name: 'คุณ แป้ง', phone: '084-567-8901', level: 'คู่หูขนฟู', levelColor: 'bg-blue-100 text-blue-600', points: 8988, pets: ['cat'], petIds: ['PET006'], line: true, theme: 'pink', visits: 12 },
+  { id: '0878901234', name: 'คุณ มารวย', phone: '087-890-1234', level: 'ผู้พิทักษ์', levelColor: 'bg-gray-100 text-gray-600', points: 250, pets: ['fish'], petIds: ['PET007'], line: true, theme: 'amber', visits: 0 },
 ];
 
 const INITIAL_CART_ITEMS = [
@@ -316,7 +332,7 @@ const PurchasingSidebar = ({ onOpenDrawer, onNavigate, activePage, onChangePage 
       { icon: Menu, label: 'เมนูหลัก', action: onOpenDrawer, highlight: true },
       { icon: Bell, label: 'การแจ้งเตือน', badge: 5 },
       { icon: LayoutDashboard, label: 'ภาพรวม', id: 'overview', active: true, action: () => onChangePage('overview') }, 
-      { icon: Store, label: 'Marketplace' },
+      { icon: Store, label: 'Marketplace', id: 'marketplace', action: () => onChangePage('marketplace') },
       { icon: ShoppingCart, label: 'ตะกร้า', id: 'cart', action: () => onChangePage('cart') },
       { icon: FileInput, label: 'ใบสั่งซื้อ' },
       { icon: Truck, label: 'ใบรับ' },
@@ -489,6 +505,106 @@ const CartView = ({ items, onUpdateQty, onRemove, onSelect, selectedItems, onSel
     );
 };
 
+// --- NEW COMPONENT: MARKETPLACE VIEW ---
+const MarketplaceView = ({ products, addToPurchaseRequest, purchaseRequestItems }) => {
+    const [searchTerm, setSearchTerm] = useState('');
+    const filteredProducts = products.filter(p => p.name.includes(searchTerm));
+
+    return (
+        <div className="flex flex-col h-full bg-[#F9FAFB] overflow-y-auto custom-scrollbar">
+            {/* Header / Search */}
+            <div className="sticky top-0 z-30 bg-white border-b border-gray-100 px-8 py-4 flex items-center justify-between shadow-sm">
+                <div>
+                    <h2 className={`${FONTS.header} text-xl font-bold text-gray-800`}>B2B Marketplace</h2>
+                    <p className={`${FONTS.body} text-xs text-gray-400`}>แหล่งรวมสินค้าสำหรับร้านสัตว์เลี้ยง ราคาส่ง</p>
+                </div>
+                <div className="relative w-96">
+                    <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" size={18} />
+                    <input 
+                        type="text" 
+                        placeholder="ค้นหาสินค้าแบรนด์ดัง ราคาส่ง..." 
+                        value={searchTerm}
+                        onChange={(e) => setSearchTerm(e.target.value)}
+                        className={`${FONTS.header} w-full pl-10 pr-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl focus:border-emerald-400 focus:outline-none transition`}
+                    />
+                </div>
+                <div className="flex gap-2">
+                    <button className="p-2.5 bg-gray-100 hover:bg-gray-200 rounded-xl text-gray-600 transition"><Filter size={20} /></button>
+                    <button className="p-2.5 bg-gray-100 hover:bg-gray-200 rounded-xl text-gray-600 transition"><ShoppingCart size={20} /></button>
+                </div>
+            </div>
+
+            <div className="p-8 space-y-8">
+                {/* Banners */}
+                <div className="grid grid-cols-3 gap-6">
+                    {MARKETPLACE_BANNERS.map((banner) => (
+                        <div key={banner.id} className={`${banner.color} rounded-2xl p-6 text-white relative overflow-hidden shadow-lg transform transition hover:scale-[1.02] cursor-pointer h-40 flex flex-col justify-center`}>
+                            <div className="absolute right-[-20px] bottom-[-20px] text-9xl opacity-20">{banner.icon}</div>
+                            <h3 className={`${FONTS.header} text-2xl font-bold mb-2 relative z-10`}>{banner.title}</h3>
+                            <p className={`${FONTS.body} text-sm opacity-90 relative z-10`}>{banner.sub}</p>
+                            <button className="mt-4 bg-white/20 hover:bg-white/30 backdrop-blur-sm px-4 py-1.5 rounded-lg text-xs font-bold w-fit transition relative z-10">ช้อปเลย</button>
+                        </div>
+                    ))}
+                </div>
+
+                {/* Categories */}
+                <div>
+                    <h3 className={`${FONTS.header} text-lg font-bold text-gray-800 mb-4 flex items-center gap-2`}><Grid size={18} className="text-emerald-600" /> หมวดหมู่แนะนำ</h3>
+                    <div className="flex gap-4 overflow-x-auto pb-2 custom-scrollbar">
+                        {MARKETPLACE_CATEGORIES.map(cat => (
+                            <button key={cat.id} className="flex flex-col items-center gap-2 min-w-[100px] p-4 bg-white rounded-2xl border border-gray-100 hover:border-emerald-400 hover:shadow-md transition group">
+                                <span className="text-3xl group-hover:scale-110 transition">{cat.icon}</span>
+                                <span className={`${FONTS.header} text-sm font-bold text-gray-600 group-hover:text-emerald-600`}>{cat.name}</span>
+                            </button>
+                        ))}
+                    </div>
+                </div>
+
+                {/* Product Grid */}
+                <div>
+                    <h3 className={`${FONTS.header} text-lg font-bold text-gray-800 mb-4 flex items-center gap-2`}><TrendingUp size={18} className="text-emerald-600" /> สินค้าขายดีประจำสัปดาห์</h3>
+                    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
+                        {filteredProducts.map((product) => {
+                            const margin = Math.round(((product.price - product.cost) / product.price) * 100);
+                            const isInCart = purchaseRequestItems.some(item => item.id === product.id);
+                            
+                            return (
+                                <div key={product.id} className="bg-white rounded-2xl border border-gray-100 overflow-hidden hover:shadow-xl transition group flex flex-col">
+                                    <div className="h-40 bg-gray-50 flex items-center justify-center text-6xl relative">
+                                        {product.img}
+                                        <div className="absolute top-3 right-3 bg-emerald-100 text-emerald-700 text-xs font-bold px-2 py-1 rounded-full flex items-center gap-1">
+                                            <TrendingUp size={12} /> Margin {margin}%
+                                        </div>
+                                    </div>
+                                    <div className="p-4 flex-1 flex flex-col">
+                                        <div className="text-xs text-gray-400 mb-1">{product.brand}</div>
+                                        <h4 className={`${FONTS.header} text-sm font-bold text-gray-800 line-clamp-2 mb-2 h-10`}>{product.name}</h4>
+                                        <div className="flex items-end justify-between mt-auto">
+                                            <div>
+                                                <p className="text-xs text-gray-400 line-through">ปลีก ฿{product.price}</p>
+                                                <p className="text-lg font-bold text-emerald-600">฿{product.cost}</p>
+                                            </div>
+                                            <button 
+                                                onClick={() => addToPurchaseRequest(product, 1)}
+                                                className={`w-10 h-10 rounded-xl flex items-center justify-center transition shadow-sm ${isInCart ? 'bg-emerald-100 text-emerald-600' : 'bg-gray-900 text-white hover:bg-emerald-600'}`}
+                                            >
+                                                {isInCart ? <CheckSquare size={20} /> : <Plus size={20} />}
+                                            </button>
+                                        </div>
+                                        <div className="mt-3 pt-3 border-t border-gray-50 flex items-center gap-2 text-[10px] text-gray-400">
+                                            <TruckIcon size={12} /> <span>ส่งฟรีเมื่อสั่งครบ 500.-</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            );
+                        })}
+                    </div>
+                </div>
+            </div>
+        </div>
+    );
+};
+
 const PurchasingModule = ({ 
     products, 
     handleNavigate, 
@@ -636,83 +752,92 @@ const PurchasingModule = ({
         <div className="h-screen w-full bg-[#F9FAFB] flex overflow-hidden">
             <PurchasingSidebar onOpenDrawer={() => setIsDrawerOpen(true)} onNavigate={handleNavigate} activePage={activePage} onChangePage={setActivePage} />
             <div className="flex-1 flex flex-col min-w-0">
-                {/* Header */}
-                <header className="h-20 bg-white border-b border-gray-100 px-8 flex items-center justify-between shrink-0 relative z-30">
-                   {activePage === 'overview' ? (
-                       <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
-                           <h1 className={`${FONTS.header} text-2xl font-bold text-gray-800`}>ภาพรวมคลังสินค้า</h1>
-                       </div>
-                   ) : (
-                       <div className="flex items-center gap-4">
-                           <button onClick={() => setActivePage('overview')} className="p-2 hover:bg-gray-100 rounded-full transition"><ArrowLeft size={24} className="text-gray-600" /></button>
-                           <h1 className={`${FONTS.header} text-2xl font-bold text-gray-800`}>ตะกร้าสินค้า</h1>
-                       </div>
-                   )}
-                   
-                   {activePage === 'overview' && (
-                       <div className="ml-auto relative w-64">
-                           <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" size={18} />
-                           <input 
-                               type="text" 
-                               placeholder="ค้นหา" 
-                               value={searchTerm}
-                               onChange={(e) => setSearchTerm(e.target.value)}
-                               className={`${FONTS.header} w-full pl-10 pr-4 py-2 bg-gray-50 border border-gray-200 rounded-xl focus:border-yellow-400 focus:outline-none transition`}
-                           />
-                       </div>
-                   )}
-                </header>
+                {/* Header Logic: Switch based on activePage */}
+                {activePage === 'marketplace' ? (
+                    // Marketplace has its own header inside the component, no need for generic header wrapper
+                    <MarketplaceView products={products} addToPurchaseRequest={togglePurchaseRequestItem} purchaseRequestItems={purchaseRequestItems} />
+                ) : (
+                    <>
+                        {/* Standard Header for Overview & Cart */}
+                        <header className="h-20 bg-white border-b border-gray-100 px-8 flex items-center justify-between shrink-0 relative z-30">
+                        {activePage === 'overview' ? (
+                            <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
+                                <h1 className={`${FONTS.header} text-2xl font-bold text-gray-800`}>ภาพรวมคลังสินค้า</h1>
+                            </div>
+                        ) : (
+                            <div className="flex items-center gap-4">
+                                <button onClick={() => setActivePage('overview')} className="p-2 hover:bg-gray-100 rounded-full transition"><ArrowLeft size={24} className="text-gray-600" /></button>
+                                <h1 className={`${FONTS.header} text-2xl font-bold text-gray-800`}>ตะกร้าสินค้า</h1>
+                            </div>
+                        )}
+                        
+                        {activePage === 'overview' && (
+                            <div className="ml-auto relative w-64">
+                                <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" size={18} />
+                                <input 
+                                    type="text" 
+                                    placeholder="ค้นหา" 
+                                    value={searchTerm}
+                                    onChange={(e) => setSearchTerm(e.target.value)}
+                                    className={`${FONTS.header} w-full pl-10 pr-4 py-2 bg-gray-50 border border-gray-200 rounded-xl focus:border-yellow-400 focus:outline-none transition`}
+                                />
+                            </div>
+                        )}
+                        </header>
 
-                {activePage === 'overview' ? (
-                    <div className="flex-1 p-8 overflow-hidden flex flex-col">
-                        {/* Tabs */}
-                        <div className="flex justify-between items-center mb-6">
-                            <div className="flex gap-2">
-                                {tabs.map(tab => (
-                                    <button 
-                                        key={tab.id}
-                                        onClick={() => setActiveTab(tab.id)}
-                                        className={`px-4 py-2 rounded-full text-sm font-bold transition flex items-center gap-2 ${activeTab === tab.id ? 'bg-gray-800 text-white' : 'bg-white text-gray-500 hover:bg-gray-100 border border-gray-200'}`}
-                                    >
-                                        {tab.label}
-                                        <span className={`text-xs px-1.5 py-0.5 rounded-full ${activeTab === tab.id ? 'bg-gray-600 text-white' : 'bg-gray-200 text-gray-600'}`}>{tab.count}</span>
+                        {/* Content Body */}
+                        {activePage === 'overview' ? (
+                            <div className="flex-1 p-8 overflow-hidden flex flex-col">
+                                {/* Tabs */}
+                                <div className="flex justify-between items-center mb-6">
+                                    <div className="flex gap-2">
+                                        {tabs.map(tab => (
+                                            <button 
+                                                key={tab.id}
+                                                onClick={() => setActiveTab(tab.id)}
+                                                className={`px-4 py-2 rounded-full text-sm font-bold transition flex items-center gap-2 ${activeTab === tab.id ? 'bg-gray-800 text-white' : 'bg-white text-gray-500 hover:bg-gray-100 border border-gray-200'}`}
+                                            >
+                                                {tab.label}
+                                                <span className={`text-xs px-1.5 py-0.5 rounded-full ${activeTab === tab.id ? 'bg-gray-600 text-white' : 'bg-gray-200 text-gray-600'}`}>{tab.count}</span>
+                                            </button>
+                                        ))}
+                                    </div>
+                                    <button onClick={() => setActivePage('cart')} className="px-4 py-2 rounded-xl bg-white border border-gray-200 text-gray-700 font-bold hover:bg-gray-50 flex items-center gap-2 shadow-sm relative group">
+                                        <ShoppingCart size={18} className="text-gray-500 group-hover:text-emerald-500 transition" />
+                                        ตะกร้า
+                                        {purchaseRequestItems.length > 0 && (
+                                            <span className="absolute -top-1 -right-1 w-5 h-5 bg-red-500 text-white text-xs rounded-full flex items-center justify-center border-2 border-white">{purchaseRequestItems.length}</span>
+                                        )}
                                     </button>
-                                ))}
-                            </div>
-                            <button onClick={() => setActivePage('cart')} className="px-4 py-2 rounded-xl bg-white border border-gray-200 text-gray-700 font-bold hover:bg-gray-50 flex items-center gap-2 shadow-sm relative group">
-                                <ShoppingCart size={18} className="text-gray-500 group-hover:text-emerald-500 transition" />
-                                ตะกร้า
-                                {purchaseRequestItems.length > 0 && (
-                                    <span className="absolute -top-1 -right-1 w-5 h-5 bg-red-500 text-white text-xs rounded-full flex items-center justify-center border-2 border-white">{purchaseRequestItems.length}</span>
-                                )}
-                            </button>
-                        </div>
+                                </div>
 
-                        {/* Filters */}
-                        <div className="flex flex-wrap items-center gap-3 mb-6" ref={dropdownRef}>
-                            <div className="relative">
-                                <button onClick={() => toggleFilterDropdown('supplier')} className="flex items-center gap-2 px-4 py-2 bg-gray-100 rounded-lg text-sm font-medium text-gray-600 hover:bg-gray-200 transition min-w-[120px] justify-between">
-                                    {filters.supplier === 'all' ? 'ผู้จัดจำหน่าย' : filters.supplier} <ChevronDown size={14} />
-                                </button>
-                                {filterDropdowns.supplier && (
-                                    <div className="absolute top-full left-0 mt-2 w-56 bg-white rounded-xl shadow-xl border border-gray-100 py-2 z-50 max-h-60 overflow-y-auto custom-scrollbar">
-                                        <button onClick={() => {setFilters({...filters, supplier: 'all'}); setFilterDropdowns({...filterDropdowns, supplier: false})}} className="w-full text-left px-4 py-2 hover:bg-gray-50 text-sm">ทั้งหมด</button>
-                                        {uniqueSuppliers.map(s => <button key={s} onClick={() => {setFilters({...filters, supplier: s}); setFilterDropdowns({...filterDropdowns, supplier: false})}} className="w-full text-left px-4 py-2 hover:bg-gray-50 text-sm">{s}</button>)}
+                                {/* Filters */}
+                                <div className="flex flex-wrap items-center gap-3 mb-6" ref={dropdownRef}>
+                                    <div className="relative">
+                                        <button onClick={() => toggleFilterDropdown('supplier')} className="flex items-center gap-2 px-4 py-2 bg-gray-100 rounded-lg text-sm font-medium text-gray-600 hover:bg-gray-200 transition min-w-[120px] justify-between">
+                                            {filters.supplier === 'all' ? 'ผู้จัดจำหน่าย' : filters.supplier} <ChevronDown size={14} />
+                                        </button>
+                                        {filterDropdowns.supplier && (
+                                            <div className="absolute top-full left-0 mt-2 w-56 bg-white rounded-xl shadow-xl border border-gray-100 py-2 z-50 max-h-60 overflow-y-auto custom-scrollbar">
+                                                <button onClick={() => {setFilters({...filters, supplier: 'all'}); setFilterDropdowns({...filterDropdowns, supplier: false})}} className="w-full text-left px-4 py-2 hover:bg-gray-50 text-sm">ทั้งหมด</button>
+                                                {uniqueSuppliers.map(s => <button key={s} onClick={() => {setFilters({...filters, supplier: s}); setFilterDropdowns({...filterDropdowns, supplier: false})}} className="w-full text-left px-4 py-2 hover:bg-gray-50 text-sm">{s}</button>)}
+                                            </div>
+                                        )}
                                     </div>
-                                )}
-                            </div>
-                            <div className="relative">
-                                <button onClick={() => toggleFilterDropdown('brand')} className="flex items-center gap-2 px-4 py-2 bg-gray-100 rounded-lg text-sm font-medium text-gray-600 hover:bg-gray-200 transition min-w-[120px] justify-between">
-                                    {filters.brand === 'all' ? 'ยี่ห้อสินค้า' : filters.brand} <ChevronDown size={14} />
-                                </button>
-                                {filterDropdowns.brand && (
-                                    <div className="absolute top-full left-0 mt-2 w-48 bg-white rounded-xl shadow-xl border border-gray-100 py-2 z-50 max-h-60 overflow-y-auto custom-scrollbar">
-                                        <button onClick={() => {setFilters({...filters, brand: 'all'}); setFilterDropdowns({...filterDropdowns, brand: false})}} className="w-full text-left px-4 py-2 hover:bg-gray-50 text-sm">ทั้งหมด</button>
-                                        {uniqueBrands.map(s => <button key={s} onClick={() => {setFilters({...filters, brand: s}); setFilterDropdowns({...filterDropdowns, brand: false})}} className="w-full text-left px-4 py-2 hover:bg-gray-50 text-sm">{s}</button>)}
+                                    {/* ... (Other filter buttons kept same) ... */}
+                                    <div className="relative">
+                                        <button onClick={() => toggleFilterDropdown('brand')} className="flex items-center gap-2 px-4 py-2 bg-gray-100 rounded-lg text-sm font-medium text-gray-600 hover:bg-gray-200 transition min-w-[120px] justify-between">
+                                            {filters.brand === 'all' ? 'ยี่ห้อสินค้า' : filters.brand} <ChevronDown size={14} />
+                                        </button>
+                                        {filterDropdowns.brand && (
+                                            <div className="absolute top-full left-0 mt-2 w-48 bg-white rounded-xl shadow-xl border border-gray-100 py-2 z-50 max-h-60 overflow-y-auto custom-scrollbar">
+                                                <button onClick={() => {setFilters({...filters, brand: 'all'}); setFilterDropdowns({...filterDropdowns, brand: false})}} className="w-full text-left px-4 py-2 hover:bg-gray-50 text-sm">ทั้งหมด</button>
+                                                {uniqueBrands.map(s => <button key={s} onClick={() => {setFilters({...filters, brand: s}); setFilterDropdowns({...filterDropdowns, brand: false})}} className="w-full text-left px-4 py-2 hover:bg-gray-50 text-sm">{s}</button>)}
+                                            </div>
+                                        )}
                                     </div>
-                                )}
-                            </div>
-                            <div className="relative">
+                                    {/* ... rest of filters ... */}
+                                    <div className="relative">
                                 <button onClick={() => toggleFilterDropdown('category')} className="flex items-center gap-2 px-4 py-2 bg-gray-100 rounded-lg text-sm font-medium text-gray-600 hover:bg-gray-200 transition min-w-[120px] justify-between">
                                     {filters.category === 'all' ? 'กลุ่มสินค้า' : filters.category} <ChevronDown size={14} />
                                 </button>
@@ -735,134 +860,135 @@ const PurchasingModule = ({
                                 )}
                             </div>
 
-                            <div className="h-8 w-px bg-gray-300 mx-2"></div>
-                            <div className="flex gap-1">
-                                {PURCHASING_ANIMAL_FILTERS.map((a, i) => (
-                                    <button 
-                                        key={i} 
-                                        onClick={() => setFilters({...filters, animal: filters.animal === a.type ? 'all' : a.type})}
-                                        className={`w-9 h-9 rounded-lg border flex items-center justify-center text-lg transition ${filters.animal === a.type ? 'bg-yellow-100 border-yellow-400' : 'bg-white hover:bg-gray-50 border-gray-200'}`}
-                                    >
-                                        {a.icon}
-                                    </button>
-                                ))}
-                            </div>
-                            <div className="ml-auto flex gap-2">
-                                <button onClick={() => setViewMode('list')} className={`p-2 border rounded-lg hover:text-gray-900 transition ${viewMode === 'list' ? 'bg-gray-100 text-gray-900 border-gray-300' : 'bg-white text-gray-400 border-gray-200'}`}><List size={20} /></button>
-                                <button onClick={() => setViewMode('grid')} className={`p-2 border rounded-lg hover:text-gray-900 transition ${viewMode === 'grid' ? 'bg-gray-100 text-gray-900 border-gray-300' : 'bg-white text-gray-400 border-gray-200'}`}><Grid size={20} /></button>
-                            </div>
-                        </div>
-
-                        {/* Product View */}
-                        {viewMode === 'list' ? (
-                            <div className="bg-white rounded-3xl shadow-sm border border-gray-100 flex-1 overflow-hidden flex flex-col">
-                                <div className="overflow-y-auto flex-1 custom-scrollbar">
-                                    <table className="w-full text-left border-collapse">
-                                        <thead className="bg-gray-50 sticky top-0 z-10 text-xs text-gray-500 uppercase">
-                                            <tr>
-                                                <th className="p-4 pl-6 font-bold">ชื่อ</th>
-                                                <th className="p-4 font-bold">รหัสสินค้า</th>
-                                                <th className="p-4 font-bold">ราคา</th>
-                                                <th className="p-4 font-bold">สต็อก</th>
-                                                <th className="p-4 font-bold text-center">แจ้งเตือน</th>
-                                                <th className="p-4 font-bold">SHELF LIFE</th>
-                                                <th className="p-4 font-bold text-center">จำนวนแนะนำให้ซื้อ</th>
-                                                <th className="p-4 font-bold"></th>
-                                            </tr>
-                                        </thead>
-                                        <tbody className="divide-y divide-gray-50 text-sm">
-                                            {filteredProducts.map((product) => {
-                                                const isInRequest = purchaseRequestItems.some(item => item.id === product.id);
-                                                const recommendQty = getRecommendedQty(product);
-                                                const inputQty = inputQuantities[product.id] !== undefined ? inputQuantities[product.id] : recommendQty;
-
-                                                return (
-                                                    <tr key={product.id} className="hover:bg-gray-50 transition group">
-                                                        <td className="p-4 pl-6">
-                                                            <div className="font-bold text-gray-800">{product.name}</div>
-                                                            <div className="text-xs text-gray-400">{product.brand}</div>
-                                                        </td>
-                                                        <td className="p-4">
-                                                            <div className="text-gray-800 font-mono text-xs">{product.barcode}</div>
-                                                            <div className="text-gray-400 text-[10px]">{product.sku}</div>
-                                                        </td>
-                                                        <td className="p-4 text-gray-800 font-medium">{product.price} บาท</td>
-                                                        <td className="p-4 text-gray-800">{product.stock} {product.unit}</td>
-                                                        <td className="p-4 text-center">
-                                                            {product.stock === 0 ? <AlertCircle className="text-red-500 mx-auto" size={18} /> : 
-                                                            product.stock <= product.stockPolicy.min ? <AlertTriangle className="text-orange-500 mx-auto" size={18} /> : 
-                                                            <CheckCircle2 className="text-green-500 mx-auto" size={18} />}
-                                                        </td>
-                                                        <td className="p-4 text-gray-600">{product.shelfLife}</td>
-                                                        <td className="p-4 text-center">
-                                                            <input 
-                                                                type="number" 
-                                                                value={inputQty}
-                                                                onChange={(e) => handleQuantityChange(product.id, e.target.value)}
-                                                                className="w-16 px-2 py-1 border border-gray-200 rounded-lg text-center text-gray-700 focus:border-yellow-400 outline-none"
-                                                            />
-                                                        </td>
-                                                        <td className="p-4 text-right">
-                                                            <button 
-                                                                onClick={() => togglePurchaseRequestItem(product, inputQty)}
-                                                                className={`w-9 h-9 flex items-center justify-center rounded-lg transition shadow-sm ${isInRequest ? 'bg-red-500 text-white hover:bg-red-600' : 'bg-[#FCD34D] hover:bg-[#F59E0B] text-gray-900'}`}
-                                                            >
-                                                                {isInRequest ? <ShoppingBasket size={18} /> : <Plus size={18} />}
-                                                            </button>
-                                                        </td>
-                                                    </tr>
-                                                );
-                                            })}
-                                        </tbody>
-                                    </table>
+                                    <div className="h-8 w-px bg-gray-300 mx-2"></div>
+                                    <div className="flex gap-1">
+                                        {PURCHASING_ANIMAL_FILTERS.map((a, i) => (
+                                            <button 
+                                                key={i} 
+                                                onClick={() => setFilters({...filters, animal: filters.animal === a.type ? 'all' : a.type})}
+                                                className={`w-9 h-9 rounded-lg border flex items-center justify-center text-lg transition ${filters.animal === a.type ? 'bg-yellow-100 border-yellow-400' : 'bg-white hover:bg-gray-50 border-gray-200'}`}
+                                            >
+                                                {a.icon}
+                                            </button>
+                                        ))}
+                                    </div>
+                                    <div className="ml-auto flex gap-2">
+                                        <button onClick={() => setViewMode('list')} className={`p-2 border rounded-lg hover:text-gray-900 transition ${viewMode === 'list' ? 'bg-gray-100 text-gray-900 border-gray-300' : 'bg-white text-gray-400 border-gray-200'}`}><List size={20} /></button>
+                                        <button onClick={() => setViewMode('grid')} className={`p-2 border rounded-lg hover:text-gray-900 transition ${viewMode === 'grid' ? 'bg-gray-100 text-gray-900 border-gray-300' : 'bg-white text-gray-400 border-gray-200'}`}><Grid size={20} /></button>
+                                    </div>
                                 </div>
+
+                                {/* Product View (List/Grid) */}
+                                {viewMode === 'list' ? (
+                                    <div className="bg-white rounded-3xl shadow-sm border border-gray-100 flex-1 overflow-hidden flex flex-col">
+                                        <div className="overflow-y-auto flex-1 custom-scrollbar">
+                                            <table className="w-full text-left border-collapse">
+                                                <thead className="bg-gray-50 sticky top-0 z-10 text-xs text-gray-500 uppercase">
+                                                    <tr>
+                                                        <th className="p-4 pl-6 font-bold">ชื่อ</th>
+                                                        <th className="p-4 font-bold">รหัสสินค้า</th>
+                                                        <th className="p-4 font-bold">ราคา</th>
+                                                        <th className="p-4 font-bold">สต็อก</th>
+                                                        <th className="p-4 font-bold text-center">แจ้งเตือน</th>
+                                                        <th className="p-4 font-bold">SHELF LIFE</th>
+                                                        <th className="p-4 font-bold text-center">จำนวนแนะนำให้ซื้อ</th>
+                                                        <th className="p-4 font-bold"></th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody className="divide-y divide-gray-50 text-sm">
+                                                    {filteredProducts.map((product) => {
+                                                        const isInRequest = purchaseRequestItems.some(item => item.id === product.id);
+                                                        const recommendQty = getRecommendedQty(product);
+                                                        const inputQty = inputQuantities[product.id] !== undefined ? inputQuantities[product.id] : recommendQty;
+
+                                                        return (
+                                                            <tr key={product.id} className="hover:bg-gray-50 transition group">
+                                                                <td className="p-4 pl-6">
+                                                                    <div className="font-bold text-gray-800">{product.name}</div>
+                                                                    <div className="text-xs text-gray-400">{product.brand}</div>
+                                                                </td>
+                                                                <td className="p-4">
+                                                                    <div className="text-gray-800 font-mono text-xs">{product.barcode}</div>
+                                                                    <div className="text-gray-400 text-[10px]">{product.sku}</div>
+                                                                </td>
+                                                                <td className="p-4 text-gray-800 font-medium">{product.price} บาท</td>
+                                                                <td className="p-4 text-gray-800">{product.stock} {product.unit}</td>
+                                                                <td className="p-4 text-center">
+                                                                    {product.stock === 0 ? <AlertCircle className="text-red-500 mx-auto" size={18} /> : 
+                                                                    product.stock <= product.stockPolicy.min ? <AlertTriangle className="text-orange-500 mx-auto" size={18} /> : 
+                                                                    <CheckCircle2 className="text-green-500 mx-auto" size={18} />}
+                                                                </td>
+                                                                <td className="p-4 text-gray-600">{product.shelfLife}</td>
+                                                                <td className="p-4 text-center">
+                                                                    <input 
+                                                                        type="number" 
+                                                                        value={inputQty}
+                                                                        onChange={(e) => handleQuantityChange(product.id, e.target.value)}
+                                                                        className="w-16 px-2 py-1 border border-gray-200 rounded-lg text-center text-gray-700 focus:border-yellow-400 outline-none"
+                                                                    />
+                                                                </td>
+                                                                <td className="p-4 text-right">
+                                                                    <button 
+                                                                        onClick={() => togglePurchaseRequestItem(product, inputQty)}
+                                                                        className={`w-9 h-9 flex items-center justify-center rounded-lg transition shadow-sm ${isInRequest ? 'bg-red-500 text-white hover:bg-red-600' : 'bg-[#FCD34D] hover:bg-[#F59E0B] text-gray-900'}`}
+                                                                    >
+                                                                        {isInRequest ? <ShoppingBasket size={18} /> : <Plus size={18} />}
+                                                                    </button>
+                                                                </td>
+                                                            </tr>
+                                                        );
+                                                    })}
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                ) : (
+                                    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 overflow-y-auto flex-1 custom-scrollbar pb-4">
+                                        {filteredProducts.map((product) => {
+                                            const isInRequest = purchaseRequestItems.some(item => item.id === product.id);
+                                            const recommendQty = getRecommendedQty(product);
+                                            const inputQty = inputQuantities[product.id] !== undefined ? inputQuantities[product.id] : recommendQty;
+
+                                            return (
+                                                <div key={product.id} className="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 flex flex-col hover:shadow-md transition">
+                                                    <div className="flex justify-between items-start mb-2">
+                                                        <div className="bg-gray-100 text-xs px-2 py-1 rounded-md text-gray-600">{product.brand}</div>
+                                                        {product.stock <= product.stockPolicy.min && <AlertTriangle size={16} className="text-orange-500" />}
+                                                    </div>
+                                                    <h3 className="font-bold text-gray-800 text-sm mb-1 line-clamp-2 h-10">{product.name}</h3>
+                                                    <div className="text-xs text-gray-500 mb-4 font-mono">{product.barcode}</div>
+                                                    <div className="flex justify-between items-center text-sm mb-2">
+                                                        <span className="text-gray-500">สต็อก</span>
+                                                        <span className={`font-bold ${product.stock === 0 ? 'text-red-500' : 'text-gray-800'}`}>{product.stock} {product.unit}</span>
+                                                    </div>
+                                                    <div className="flex justify-between items-center text-sm mb-4">
+                                                        <span className="text-gray-500">ราคา</span>
+                                                        <span className="font-bold text-gray-800">{product.price}</span>
+                                                    </div>
+                                                    <div className="mt-auto flex items-center gap-2">
+                                                        <input type="number" value={inputQty} onChange={(e) => handleQuantityChange(product.id, e.target.value)} className="w-full px-2 py-2 border border-gray-200 rounded-lg text-center text-gray-700 text-sm focus:border-yellow-400 outline-none" />
+                                                        <button onClick={() => togglePurchaseRequestItem(product, inputQty)} className={`w-10 h-10 flex-shrink-0 flex items-center justify-center rounded-lg transition ${isInRequest ? 'bg-red-500 text-white hover:bg-red-600' : 'bg-[#FCD34D] hover:bg-[#F59E0B] text-gray-900'}`}>
+                                                            {isInRequest ? <ShoppingBasket size={18} /> : <Plus size={18} />}
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            );
+                                        })}
+                                    </div>
+                                )}
                             </div>
                         ) : (
-                            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 overflow-y-auto flex-1 custom-scrollbar pb-4">
-                                {filteredProducts.map((product) => {
-                                    const isInRequest = purchaseRequestItems.some(item => item.id === product.id);
-                                    const recommendQty = getRecommendedQty(product);
-                                    const inputQty = inputQuantities[product.id] !== undefined ? inputQuantities[product.id] : recommendQty;
-
-                                    return (
-                                        <div key={product.id} className="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 flex flex-col hover:shadow-md transition">
-                                            {/* Grid View Content (Same as before but updated button) */}
-                                            <div className="flex justify-between items-start mb-2">
-                                                <div className="bg-gray-100 text-xs px-2 py-1 rounded-md text-gray-600">{product.brand}</div>
-                                                {product.stock <= product.stockPolicy.min && <AlertTriangle size={16} className="text-orange-500" />}
-                                            </div>
-                                            <h3 className="font-bold text-gray-800 text-sm mb-1 line-clamp-2 h-10">{product.name}</h3>
-                                            <div className="text-xs text-gray-500 mb-4 font-mono">{product.barcode}</div>
-                                            <div className="flex justify-between items-center text-sm mb-2">
-                                                <span className="text-gray-500">สต็อก</span>
-                                                <span className={`font-bold ${product.stock === 0 ? 'text-red-500' : 'text-gray-800'}`}>{product.stock} {product.unit}</span>
-                                            </div>
-                                            <div className="flex justify-between items-center text-sm mb-4">
-                                                <span className="text-gray-500">ราคา</span>
-                                                <span className="font-bold text-gray-800">{product.price}</span>
-                                            </div>
-                                            <div className="mt-auto flex items-center gap-2">
-                                                <input type="number" value={inputQty} onChange={(e) => handleQuantityChange(product.id, e.target.value)} className="w-full px-2 py-2 border border-gray-200 rounded-lg text-center text-gray-700 text-sm focus:border-yellow-400 outline-none" />
-                                                <button onClick={() => togglePurchaseRequestItem(product, inputQty)} className={`w-10 h-10 flex-shrink-0 flex items-center justify-center rounded-lg transition ${isInRequest ? 'bg-red-500 text-white hover:bg-red-600' : 'bg-[#FCD34D] hover:bg-[#F59E0B] text-gray-900'}`}>
-                                                    {isInRequest ? <ShoppingBasket size={18} /> : <Plus size={18} />}
-                                                </button>
-                                            </div>
-                                        </div>
-                                    );
-                                })}
-                            </div>
+                            // --- CART VIEW (MARKETPLACE STYLE) ---
+                            <CartView 
+                                items={purchaseRequestItems} 
+                                onUpdateQty={handleUpdateCartQty} 
+                                onRemove={handleRemoveFromCart}
+                                onSelect={handleSelectItems}
+                                selectedItems={selectedItems}
+                                onSelectAll={handleSelectAll}
+                            />
                         )}
-                    </div>
-                ) : (
-                    // --- CART VIEW (MARKETPLACE STYLE) ---
-                    <CartView 
-                        items={purchaseRequestItems} 
-                        onUpdateQty={handleUpdateCartQty} 
-                        onRemove={handleRemoveFromCart}
-                        onSelect={handleSelectItems}
-                        selectedItems={selectedItems}
-                        onSelectAll={handleSelectAll}
-                    />
+                    </>
                 )}
             </div>
         </div>
