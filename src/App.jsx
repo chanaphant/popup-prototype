@@ -7,7 +7,7 @@ const {
   
   // Actions & UI
   Search, Plus, Minus, X, Check, Save, Edit, Edit2, Trash2, RefreshCcw, RefreshCw, 
-  Download, Upload, Share2, Copy, Printer, Scan, Filter, MoreHorizontal, Power,
+  Download, Upload, Share2, Copy, Printer, Scan, Filter, MoreHorizontal, Power, Move,
   
   // Status & Feedback
   Bell, CheckCircle, CheckCircle2, AlertCircle, AlertTriangle, Lock, Unlock, ShieldCheck, 
@@ -18,7 +18,7 @@ const {
   ShoppingBasket, ShoppingCart, Camera, Globe, MapPin,
   
   // Animals & Grooming
-  Dog, Cat, Rabbit, Fish, Bird, feather, Scissors, Activity, HeartPulse, Hexagon,
+  Dog, Cat, Rabbit, Fish, Bird, Feather, Scissors, Activity, HeartPulse, Hexagon,
   
   // Business & Data
   TrendingUp, Percent, Database, FileBarChart, FileSearch, Briefcase, SlidersHorizontal, 
@@ -30,13 +30,16 @@ const {
   // Time
   Clock, Clock3, ClockIcon, History,
   
+  // New Icons for Home 
+  Wifi, Music, BoxSelect, FileSpreadsheet, Stethoscope, Target, Building,
+  
   // Renamed Imports (to avoid conflicts)
-  Map as MapIcon, 
+  Map as MapIcon,
   Calendar as CalendarIcon, 
   Image as ImageIcon, 
   Link as LinkIcon
 } from 'lucide-react';
-  // replace feather as pawprint
+
   
 // ==========================================
 // ZONE A: SSOT (Single Source of Truth)
@@ -46,6 +49,22 @@ const {
 const FONTS = {
   header: "font-['Prompt',_sans-serif]",
   body: "font-['Sarabun',_sans-serif]"
+};
+
+// --- 1. NEW SETTINGS CONFIG (from Theme & Setup) ---
+const INITIAL_SETTINGS = {
+  shopName: 'Pet Omni Store',
+  branch: 'สาขาหลัก (Main)',
+  taxRate: 7, // VAT %
+  currency: 'THB',
+  currencySymbol: '฿',
+  salesMode: 'retail',
+  rounding: 'floor', 
+  shiftStart: '08:00',
+  theme: 'dark', // Default theme
+  onlineChannels: { line: true, shopee: false, lazada: false, tiktok: false },
+  notifications: { stock: true, shift: true, sound: true },
+  musicVolume: 50
 };
 
 const SYSTEM_DEFAULTS = {
@@ -321,6 +340,30 @@ const RECOMMENDED_ITEMS = [
   { id: 105, name: 'แชมพูกำจัดเห็บหมัด', price: 350, code: 'SHA', type: 'product' },
   { id: 999, name: 'อาบน้ำตัดขน (S)', price: 450, code: 'SVC', type: 'service' }, // Added Service Item
   { id: 998, name: 'อาบน้ำตัดขน (L)', price: 800, code: 'SVC', type: 'service' }, // Added Service Item
+];
+
+// --- NEW HOME/DRAWER DATA (from Theme & Setup) ---
+const INITIAL_HOME_MODULES = [
+  { id: 'pos', title: 'POS ขายหน้าร้าน', icon: Store, color: 'bg-[#3B3068]', text: 'text-purple-300' },
+  { id: 'grooming', title: 'จองคิว (Grooming)', icon: CalendarDays, color: 'bg-[#065F46]', text: 'text-emerald-300' },
+  { id: 'crm', title: 'สมาชิก CRM', icon: Users, color: 'bg-[#026AA7]', text: 'text-sky-300' },
+  { id: 'purchasing', title: 'ซื้อสินค้า', icon: Package, color: 'bg-[#0F766E]', text: 'text-teal-300' },
+  { id: 'promo', title: 'โปรโมชั่น', icon: Tag, color: 'bg-[#BE123C]', text: 'text-rose-300' },
+  { id: 'expenses', title: 'ค่าใช้จ่าย', icon: Receipt, color: 'bg-[#15803D]', text: 'text-green-300' },
+  { id: 'master', title: 'จัดการข้อมูล', icon: Database, color: 'bg-[#4B5563]', text: 'text-gray-300' }, 
+  { id: 'stock_count', title: 'ตรวจนับสินค้า', icon: BoxSelect, color: 'bg-[#D97706]', text: 'text-amber-300' },
+  { id: 'reports', title: 'รายงาน', icon: FileBarChart, color: 'bg-[#4338CA]', text: 'text-indigo-300' },
+  { id: 'online', title: 'ช่องทางออนไลน์', icon: Globe, color: 'bg-[#0EA5E9]', text: 'text-cyan-300' },
+  { id: 'pet_match', title: 'แนะนำสัตว์เลี้ยง', icon: Heart, color: 'bg-[#EC4899]', text: 'text-pink-300' },
+  { id: 'breeder', title: 'จัดหาผู้เลี้ยง', icon: User, color: 'bg-[#8B5CF6]', text: 'text-violet-300' },
+  { id: 'contacts', title: 'รายชื่อผู้ติดต่อ', icon: FileSpreadsheet, color: 'bg-[#64748B]', text: 'text-slate-300' },
+  { id: 'clinic', title: 'คลีนิคสัตว์เลี้ยง', icon: Stethoscope, color: 'bg-[#EF4444]', text: 'text-red-300' },
+  { id: 'goals', title: 'ตั้งเป้าหมาย', icon: Target, color: 'bg-[#14B8A6]', text: 'text-teal-300' },
+  { id: 'branch', title: 'จัดการสาขา', icon: Building, color: 'bg-[#F59E0B]', text: 'text-yellow-300' },
+  { id: 'iot', title: 'IoT Control', icon: Wifi, color: 'bg-[#6366F1]', text: 'text-indigo-300' },
+  { id: 'music', title: 'เพลงในร้าน', icon: Music, color: 'bg-[#10B981]', text: 'text-emerald-300' },
+  { id: 'settings', title: 'ตั้งค่าร้าน', icon: Settings, color: 'bg-[#1F2937]', text: 'text-gray-300' },
+  { id: 'help', title: 'ศูนย์ช่วยเหลือ', icon: HelpCircle, color: 'bg-[#C2410C]', text: 'text-orange-300' },
 ];
 
 const DRAWER_MENU_ITEMS = [
@@ -761,7 +804,7 @@ const CRMSidebar = ({ onOpenDrawer, onNavigate, activeTab, onTabChange }) => {
       { icon: Menu, label: 'เมนูหลัก', action: onOpenDrawer, id: 'menu', highlight: true },
       { icon: Bell, label: 'การแจ้งเตือน', badge: 99 },
       { icon: Users, label: 'สมาชิก', id: 'members', action: () => onTabChange('members') },
-      { icon: feather, label: 'สัตว์เลี้ยง', id: 'pets', action: () => onTabChange('pets') },
+      { icon: Feather, label: 'สัตว์เลี้ยง', id: 'pets', action: () => onTabChange('pets') },
       { icon: MessageCircle, label: 'Line OA', id: 'line_oa', action: () => onTabChange('line_oa') },
       { icon: Megaphone, label: 'BroadCast' },
       { icon: Settings, label: 'ตั้งค่า', id: 'settings', action: () => onTabChange('settings') },
@@ -1066,7 +1109,7 @@ const POSModule = ({ cartItems, setCartItems, currentMember, recommendedItems, h
                 </div>
                 <div className="w-72 flex flex-col gap-2 shrink-0">
                     <div className="flex flex-wrap items-start justify-start gap-2 py-1 min-h-[50px] content-start">
-                      {currentMemberPets.length > 0 ? (currentMemberPets.map((pet, i) => (<div key={i} className="flex flex-col items-center gap-1 cursor-pointer group w-[3.5rem]"><div className="relative w-10 h-10 rounded-full bg-orange-100 border-2 border-white shadow-sm flex items-center justify-center text-lg group-hover:scale-110 transition">{getPetEmoji(pet.type)}{pet.chronicDiseases && pet.chronicDiseases.length > 0 && (<div className="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full text-white text-[8px] flex items-center justify-center border border-white">!</div>)}</div><span className={`${FONTS.header} text-[10px] font-bold text-gray-600 truncate w-full text-center`}>{pet.name}</span></div>))) : (<div className="flex flex-col items-center justify-center w-full py-1 text-gray-400 opacity-50"><feather size={20} className="mb-0.5"/><span className="text-[10px]">ไม่พบสัตว์เลี้ยง</span></div>)}
+                      {currentMemberPets.length > 0 ? (currentMemberPets.map((pet, i) => (<div key={i} className="flex flex-col items-center gap-1 cursor-pointer group w-[3.5rem]"><div className="relative w-10 h-10 rounded-full bg-orange-100 border-2 border-white shadow-sm flex items-center justify-center text-lg group-hover:scale-110 transition">{getPetEmoji(pet.type)}{pet.chronicDiseases && pet.chronicDiseases.length > 0 && (<div className="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full text-white text-[8px] flex items-center justify-center border border-white">!</div>)}</div><span className={`${FONTS.header} text-[10px] font-bold text-gray-600 truncate w-full text-center`}>{pet.name}</span></div>))) : (<div className="flex flex-col items-center justify-center w-full py-1 text-gray-400 opacity-50"><Feather size={20} className="mb-0.5"/><span className="text-[10px]">ไม่พบสัตว์เลี้ยง</span></div>)}
                       <div className="flex flex-col items-center gap-1 cursor-pointer group w-[3.5rem]"><div className="w-10 h-10 rounded-full border-2 border-dashed border-gray-300 flex items-center justify-center text-gray-400 group-hover:border-emerald-500 group-hover:text-emerald-500 transition bg-white"><Plus size={18} /></div><span className={`${FONTS.header} text-[10px] font-bold text-gray-400`}>เพิ่ม</span></div>
                     </div>
                     <div className="bg-white p-1 rounded-xl flex shadow-sm border border-gray-100">{['ประวัติ', 'แนะนำ', 'โปรฯ'].map((tab, i) => (<button key={i} className={`flex-1 py-2 rounded-lg text-sm font-bold transition ${i === 1 ? 'bg-emerald-50 text-emerald-600' : 'text-gray-400 hover:text-gray-600'}`}>{i === 1 && <Star size={14} className="inline mr-1 mb-0.5" />}{tab}</button>))}</div>
@@ -2163,6 +2206,219 @@ const PurchasingModule = ({ products, handleNavigate, setIsDrawerOpen, purchaseR
     );
 };
 
+const SettingsView = ({ settings, setSettings, onBack }) => {
+    const [activeTab, setActiveTab] = useState('sales');
+
+    const SettingSection = ({ title, children }) => (
+        <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 mb-6">
+            <h3 className={`${FONTS.header} text-lg font-bold text-gray-800 mb-4 border-b border-gray-100 pb-2`}>{title}</h3>
+            <div className="space-y-4">{children}</div>
+        </div>
+    );
+
+    const Toggle = ({ label, checked, onChange }) => (
+        <div className="flex justify-between items-center">
+            <span className="text-gray-700 font-medium">{label}</span>
+            <div onClick={() => onChange(!checked)} className={`w-12 h-6 rounded-full p-1 cursor-pointer transition-colors ${checked ? 'bg-emerald-500' : 'bg-gray-200'}`}>
+                <div className={`w-4 h-4 bg-white rounded-full shadow-sm transition-transform ${checked ? 'translate-x-6' : 'translate-x-0'}`}></div>
+            </div>
+        </div>
+    );
+
+    const InputRow = ({ label, value, onChange, type = 'text', suffix }) => (
+        <div className="flex justify-between items-center">
+             <span className="text-gray-700 font-medium">{label}</span>
+             <div className="flex items-center gap-2">
+                 <input type={type} value={value} onChange={(e) => onChange(e.target.value)} className="text-right border border-gray-200 rounded-lg px-3 py-1.5 w-32 focus:border-emerald-500 outline-none" />
+                 {suffix && <span className="text-gray-400 text-sm">{suffix}</span>}
+             </div>
+        </div>
+    );
+
+    const SelectRow = ({ label, value, onChange, options }) => (
+        <div className="flex justify-between items-center">
+             <span className="text-gray-700 font-medium">{label}</span>
+             <select value={value} onChange={(e) => onChange(e.target.value)} className="text-right border border-gray-200 rounded-lg px-3 py-1.5 bg-white outline-none">
+                 {options.map(o => <option key={o.value} value={o.value}>{o.label}</option>)}
+             </select>
+        </div>
+    );
+
+    return (
+        <div className="h-screen bg-[#F9FAFB] flex flex-col">
+            <header className="h-16 bg-white border-b border-gray-200 flex items-center px-6 gap-4 shrink-0">
+                <button onClick={onBack} className="p-2 hover:bg-gray-100 rounded-full"><ArrowLeft className="text-gray-600" /></button>
+                <h1 className={`${FONTS.header} text-xl font-bold text-gray-800`}>ตั้งค่าร้านค้า (Store Settings)</h1>
+            </header>
+            
+            <div className="flex flex-1 overflow-hidden">
+                {/* Sidebar */}
+                <div className="w-64 bg-white border-r border-gray-200 flex flex-col p-4 gap-2">
+                    {[
+                        { id: 'sales', label: 'การขาย & การเงิน', icon: CreditCard },
+                        { id: 'system', label: 'ระบบ & ธีม', icon: Settings },
+                        { id: 'channels', label: 'ช่องทางขาย', icon: Globe },
+                        { id: 'notif', label: 'การแจ้งเตือน', icon: Bell },
+                    ].map(tab => (
+                        <button key={tab.id} onClick={() => setActiveTab(tab.id)} className={`flex items-center gap-3 px-4 py-3 rounded-xl font-bold text-sm transition ${activeTab === tab.id ? 'bg-emerald-50 text-emerald-600' : 'text-gray-500 hover:bg-gray-50'}`}>
+                            <tab.icon size={18} /> {tab.label}
+                        </button>
+                    ))}
+                </div>
+
+                {/* Content */}
+                <div className="flex-1 overflow-y-auto p-8 custom-scrollbar">
+                    <div className="max-w-2xl mx-auto">
+                        {activeTab === 'sales' && (
+                            <SettingSection title="การจัดการรูปแบบการขาย">
+                                <SelectRow label="รูปแบบการขายหลัก" value={settings.salesMode} onChange={v => setSettings({...settings, salesMode: v})} options={[{value:'retail', label:'ปลีก (Retail)'}, {value:'wholesale', label:'ส่ง (Wholesale)'}, {value:'mixed', label:'ผสม (Mixed)'}]} />
+                                <InputRow label="อัตราภาษี (VAT)" value={settings.taxRate} onChange={v => setSettings({...settings, taxRate: parseFloat(v)})} type="number" suffix="%" />
+                                <SelectRow label="การปัดเศษทศนิยม" value={settings.rounding} onChange={v => setSettings({...settings, rounding: v})} options={[{value:'floor', label:'ปัดลง (Floor)'}, {value:'round', label:'ปัดตามหลัก (Round)'}, {value:'ceil', label:'ปัดขึ้น (Ceil)'}, {value:'none', label:'ไม่ปัด (None)'}]} />
+                                <InputRow label="เวลาเริ่มรอบการขาย" value={settings.shiftStart} onChange={v => setSettings({...settings, shiftStart: v})} type="time" />
+                            </SettingSection>
+                        )}
+
+                        {activeTab === 'system' && (
+                            <SettingSection title="การแสดงผล & ระบบ">
+                                <SelectRow label="ธีมแอพพลิเคชั่น" value={settings.theme} onChange={v => setSettings({...settings, theme: v})} options={[{value:'dark', label:'Dark Mode'}, {value:'light', label:'Light Mode'}, {value:'system', label:'System Default'}]} />
+                                <div className="border-t border-gray-100 my-2"></div>
+                                <InputRow label="ระดับเสียงเพลงในร้าน (IoT)" value={settings.musicVolume} onChange={v => setSettings({...settings, musicVolume: parseInt(v)})} type="range" suffix={`${settings.musicVolume}%`} />
+                            </SettingSection>
+                        )}
+
+                        {activeTab === 'channels' && (
+                            <SettingSection title="ช่องทางการขายออนไลน์">
+                                <Toggle label="Line Shopping / Line OA" checked={settings.onlineChannels.line} onChange={v => setSettings({...settings, onlineChannels: {...settings.onlineChannels, line: v}})} />
+                                <Toggle label="Shopee Integration" checked={settings.onlineChannels.shopee} onChange={v => setSettings({...settings, onlineChannels: {...settings.onlineChannels, shopee: v}})} />
+                                <Toggle label="Lazada Integration" checked={settings.onlineChannels.lazada} onChange={v => setSettings({...settings, onlineChannels: {...settings.onlineChannels, lazada: v}})} />
+                                <Toggle label="TikTok Shop" checked={settings.onlineChannels.tiktok} onChange={v => setSettings({...settings, onlineChannels: {...settings.onlineChannels, tiktok: v}})} />
+                            </SettingSection>
+                        )}
+
+                        {activeTab === 'notif' && (
+                            <SettingSection title="การตั้งค่าการแจ้งเตือน">
+                                <Toggle label="แจ้งเตือนสต็อกใกล้หมด" checked={settings.notifications.stock} onChange={v => setSettings({...settings, notifications: {...settings.notifications, stock: v}})} />
+                                <Toggle label="แจ้งเตือนเปิด/ปิดกะ" checked={settings.notifications.shift} onChange={v => setSettings({...settings, notifications: {...settings.notifications, shift: v}})} />
+                                <Toggle label="เสียงแจ้งเตือน (Sound)" checked={settings.notifications.sound} onChange={v => setSettings({...settings, notifications: {...settings.notifications, sound: v}})} />
+                            </SettingSection>
+                        )}
+                    </div>
+                </div>
+            </div>
+        </div>
+    );
+};
+
+// ==========================================
+// ZONE: NEW HOME SCREEN (Swipe & Drag)
+// ==========================================
+
+const HomeScreen = ({ modules, onNavigate, onReorderModules }) => {
+    // Pagination Logic
+    const itemsPerPage = 12; // 3 rows x 4 cols
+    const [page, setPage] = useState(0);
+    const totalPages = Math.ceil(modules.length / itemsPerPage);
+    const displayedModules = modules.slice(page * itemsPerPage, (page + 1) * itemsPerPage);
+
+    // Drag & Drop State
+    const [draggedIndex, setDraggedIndex] = useState(null);
+
+    const handleDragStart = (e, index) => {
+        setDraggedIndex(page * itemsPerPage + index);
+        e.dataTransfer.effectAllowed = "move";
+        // Ghost image styling usually handled by browser, or use custom drag layer
+    };
+
+    const handleDragOver = (e, index) => {
+        e.preventDefault();
+        e.dataTransfer.dropEffect = "move";
+    };
+
+    const handleDrop = (e, dropIndexLocal) => {
+        e.preventDefault();
+        const absoluteDropIndex = page * itemsPerPage + dropIndexLocal;
+        if (draggedIndex === null || draggedIndex === absoluteDropIndex) return;
+
+        const newModules = [...modules];
+        const [removed] = newModules.splice(draggedIndex, 1);
+        newModules.splice(absoluteDropIndex, 0, removed);
+        
+        onReorderModules(newModules);
+        setDraggedIndex(null);
+    };
+
+    return (
+        <div className="bg-[#141419] min-h-screen w-full flex flex-col overflow-hidden text-white font-sans">
+             <style>{`@import url('https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;600;700&family=Sarabun:wght@300;400;500;600&display=swap');`}</style>
+             
+             {/* Header */}
+             <header className="h-16 flex items-center justify-between px-6 border-b border-gray-800 bg-[#1E1E24]">
+                <div className="flex items-center gap-4">
+                    <div className="w-10 h-10 bg-gradient-to-br from-purple-600 to-blue-600 rounded-lg flex items-center justify-center shadow-lg"><span className={`${FONTS.header} font-bold text-xl`}>P</span></div>
+                    <div><h1 className={`${FONTS.header} font-bold text-lg leading-tight`}>Pet Omni Store</h1><p className={`${FONTS.body} text-xs text-purple-400 font-medium`}>สาขาหลัก (Main)</p></div>
+                </div>
+                <div className="flex items-center gap-4">
+                    <span className="text-gray-400 text-sm">{new Date().toLocaleDateString('th-TH', { weekday: 'long', day: 'numeric', month: 'long'})}</span>
+                    <div className="w-px h-6 bg-gray-700"></div>
+                    <div className="flex items-center gap-2 bg-[#2A2A32] px-3 py-1.5 rounded-full border border-gray-700">
+                        <div className="w-2 h-2 bg-emerald-500 rounded-full animate-pulse"></div><span className="text-xs text-gray-300">Online</span>
+                    </div>
+                </div>
+             </header>
+
+             <main className="flex-1 p-6 overflow-hidden">
+                <div className="grid grid-cols-12 gap-6 h-full">
+                    
+                    {/* LEFT: Fixed Widgets (Non-draggable) */}
+                    <div className="col-span-3 flex flex-col gap-6 h-full">
+                        <div className="h-[40%]"><SalesChart data={SALES_HISTORY_DB} /></div>
+                        <div className="h-[30%]"><ServiceQueue data={INITIAL_APPOINTMENTS_DATA} /></div>
+                        <div className="h-[30%]"><OrderList data={PetProductsDB} /></div>
+                    </div>
+
+                    {/* RIGHT: Draggable Icon Grid with Pagination */}
+                    <div className="col-span-9 h-full flex flex-col">
+                        <div className="flex items-center justify-between mb-4 px-2">
+                             <div className="flex items-center gap-2"><LayoutDashboard className="text-purple-400" /><h2 className={`${FONTS.header} text-xl font-bold`}>เมนูหลัก (หน้า {page + 1}/{totalPages})</h2></div>
+                             <div className="flex gap-2">
+                                 <button disabled={page===0} onClick={()=>setPage(p=>p-1)} className={`p-2 rounded-full border ${page===0 ? 'border-gray-700 text-gray-700' : 'border-gray-500 text-white hover:bg-gray-700'}`}><ChevronLeft/></button>
+                                 <button disabled={page===totalPages-1} onClick={()=>setPage(p=>p+1)} className={`p-2 rounded-full border ${page===totalPages-1 ? 'border-gray-700 text-gray-700' : 'border-gray-500 text-white hover:bg-gray-700'}`}><ChevronRight/></button>
+                             </div>
+                        </div>
+
+                        <div className="flex-1 grid grid-cols-4 grid-rows-3 gap-5 animate-in fade-in duration-300">
+                            {displayedModules.map((menu, index) => (
+                                <div 
+                                    key={menu.id}
+                                    draggable
+                                    onDragStart={(e) => handleDragStart(e, index)}
+                                    onDragOver={(e) => handleDragOver(e, index)}
+                                    onDrop={(e) => handleDrop(e, index)}
+                                    onClick={() => onNavigate(menu.id)}
+                                    className={`${menu.color} rounded-3xl p-4 flex flex-col justify-center items-center gap-3 transition-all duration-200 transform hover:scale-[1.02] shadow-xl group cursor-pointer relative border border-white/5 active:cursor-grabbing`}
+                                >
+                                    <div className="absolute top-2 right-2 opacity-0 group-hover:opacity-50"><Move size={14} className="text-white"/></div>
+                                    <div className={`p-4 rounded-2xl bg-white/10 group-hover:bg-white/20 transition-colors`}>
+                                        <menu.icon size={36} className="text-white" />
+                                    </div>
+                                    <span className={`${FONTS.header} text-white text-lg font-bold tracking-wide text-center leading-tight`}>{menu.title}</span>
+                                </div>
+                            ))}
+                        </div>
+                        
+                        {/* Page Indicators */}
+                        <div className="h-8 flex justify-center items-center gap-2 mt-2">
+                             {[...Array(totalPages)].map((_, i) => (
+                                 <div key={i} onClick={() => setPage(i)} className={`w-2 h-2 rounded-full cursor-pointer transition-all ${page === i ? 'bg-purple-500 w-6' : 'bg-gray-600 hover:bg-gray-400'}`}></div>
+                             ))}
+                        </div>
+                    </div>
+                </div>
+             </main>
+        </div>
+    );
+};
+
 // ==========================================
 // ZONE E (Part 5): CRM FEATURES
 // ==========================================
@@ -2479,7 +2735,7 @@ const MemberDetailView = ({ member, onBack }) => {
 
                     {/* Zone 3: Pet Stats */}
                     <div className="bg-white rounded-3xl p-6 shadow-sm border border-gray-100 relative">
-                        <div className="flex justify-between items-center mb-4"><h3 className={`${FONTS.header} font-bold text-gray-800 flex items-center gap-2`}><feather size={18} className="text-gray-400"/> จำนวนสัตว์เลี้ยง (ทั้งหมด)</h3>{editingSection === 'stats' ? (<div className="flex gap-2"><button onClick={() => handleSaveSection('stats')} className="text-green-600 hover:text-green-700 bg-green-50 p-1.5 rounded-lg"><Save size={16} /></button><button onClick={() => setEditingSection(null)} className="text-gray-400 hover:text-gray-600 bg-gray-50 p-1.5 rounded-lg"><X size={16} /></button></div>) : (<button onClick={() => setEditingSection('stats')} className="text-gray-400 hover:text-gray-600 transition"><Edit2 size={16} /></button>)}</div>
+                        <div className="flex justify-between items-center mb-4"><h3 className={`${FONTS.header} font-bold text-gray-800 flex items-center gap-2`}><Feather size={18} className="text-gray-400"/> จำนวนสัตว์เลี้ยง (ทั้งหมด)</h3>{editingSection === 'stats' ? (<div className="flex gap-2"><button onClick={() => handleSaveSection('stats')} className="text-green-600 hover:text-green-700 bg-green-50 p-1.5 rounded-lg"><Save size={16} /></button><button onClick={() => setEditingSection(null)} className="text-gray-400 hover:text-gray-600 bg-gray-50 p-1.5 rounded-lg"><X size={16} /></button></div>) : (<button onClick={() => setEditingSection('stats')} className="text-gray-400 hover:text-gray-600 transition"><Edit2 size={16} /></button>)}</div>
                         {editingSection === 'stats' ? (
                             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 animate-in fade-in zoom-in duration-200">{PET_TYPE_CONFIG.map(type => (<div key={type.id} className="bg-gray-50 border border-gray-200 rounded-xl p-3 flex flex-col items-center gap-2"><div className="flex items-center gap-2"><span className="text-xl">{type.icon}</span><span className="text-xs font-bold text-gray-600">{type.label}</span></div><div className="flex items-center bg-white rounded-lg shadow-sm border border-gray-200"><button onClick={() => handleStatChange(type.id, -1)} className="p-2 text-gray-400 hover:text-gray-600 hover:bg-gray-50 rounded-l-lg"><Minus size={14}/></button><input type="number" className="w-12 text-center text-sm font-bold text-gray-800 outline-none" value={petStatCounts[type.id] || 0} onChange={(e) => { const val = parseInt(e.target.value) || 0; setPetStatCounts({...petStatCounts, [type.id]: val}); }}/><button onClick={() => handleStatChange(type.id, 1)} className="p-2 text-green-500 hover:text-green-700 hover:bg-green-50 rounded-r-lg"><Plus size={14}/></button></div></div>))}</div>
                         ) : (
@@ -2541,7 +2797,7 @@ const MemberDetailView = ({ member, onBack }) => {
                                     <div className="pt-4 border-t border-gray-100"><button onClick={() => setPanelMode('detail')} className="w-full py-2 border border-gray-200 rounded-lg text-gray-600 font-bold hover:bg-gray-50">กลับหน้ารายละเอียด</button></div>
                                 </div>
                             ) : (
-                                <div className="h-full flex flex-col items-center justify-center text-gray-300"><feather size={64} className="mb-4 opacity-20"/><p>เลือกสัตว์เลี้ยงเพื่อดูรายละเอียด</p></div>
+                                <div className="h-full flex flex-col items-center justify-center text-gray-300"><Feather size={64} className="mb-4 opacity-20"/><p>เลือกสัตว์เลี้ยงเพื่อดูรายละเอียด</p></div>
                             )}
                         </div>
                     </div>
@@ -3047,7 +3303,8 @@ const App = () => {
 // 1. SYSTEM & NAVIGATION
   const [currentView, setCurrentView] = useState('home');                // App-start here
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
-  const [settings, setSettings] = useState(SYSTEM_DEFAULTS);
+  const [settings, setSettings] = useState(INITIAL_SETTINGS); // ✅ ใช้ INITIAL_SETTINGS ใหม่
+  const [homeModules, setHomeModules] = useState(INITIAL_HOME_MODULES); // ✅ เพิ่ม State Home Module
 // 2. DATABASE STATE
   const [products, setProducts] = useState(PetProductsDB);
   const [membersDB, setMembersDB] = useState(INITIAL_MEMBERS_DB);
@@ -3146,38 +3403,8 @@ const App = () => {
   const renderContent = () => {
     switch (currentView) {
         case 'home':
-            return (
-                <div className="bg-[#141419] min-h-screen w-full flex flex-col overflow-hidden text-white font-sans selection:bg-purple-500 selection:text-white">
-                  <style>{`@import url('https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;600;700&family=Sarabun:wght@300;400;500;600&display=swap'); .custom-scrollbar::-webkit-scrollbar { width: 6px; } .custom-scrollbar::-webkit-scrollbar-track { background: transparent; } .custom-scrollbar::-webkit-scrollbar-thumb { background-color: rgba(156, 163, 175, 0.5); border-radius: 20px; }`}</style>
-                  <header className="h-16 theme.sidebar.bg flex items-center justify-between px-6 border-b border-gray-800">
-                    <div className="flex items-center gap-4">
-                        <div className="w-10 h-10 bg-gradient-to-br from-purple-600 to-blue-600 rounded-lg flex items-center justify-center shadow-lg shadow-purple-900/50"><span className={`${FONTS.header} font-bold text-xl`}>P</span></div>
-                        <div><h1 className={`${FONTS.header} font-bold text-lg leading-tight`}>{settings.shopName}</h1><p className={`${FONTS.body} text-xs text-purple-400 font-medium`}>{settings.branch}</p></div>
-                    </div>
-                    <div className="flex items-center gap-6">
-                        <div className="flex items-center gap-2 bg-[#2A2A32] px-3 py-1.5 rounded-full border border-gray-700"><div className="w-2 h-2 bg-emerald-500 rounded-full animate-pulse"></div><span className={`${FONTS.body} text-sm text-gray-300`}>Online</span></div>
-                        <div className="flex items-center gap-3 bg-[#2A2A32] pl-4 pr-2 py-1.5 rounded-full border border-gray-700 cursor-pointer hover:bg-[#32323c] transition group">
-                            <div className="text-right"><p className={`${FONTS.header} text-sm font-bold text-white group-hover:text-purple-300 transition`}>ผู้จัดการร้าน</p><p className={`${FONTS.body} text-xs text-gray-400 uppercase tracking-wider`}>Admin Access</p></div>
-                            <div className="w-9 h-9 rounded-full bg-gradient-to-r from-gray-700 to-gray-600 flex items-center justify-center border border-gray-500 shadow-inner"><User size={16} className="text-gray-300" /></div>
-                        </div>
-                    </div>
-                  </header>
-                  <main className="flex-1 p-6 overflow-hidden">
-                    <div className="grid grid-cols-12 gap-6 h-full">
-                        {/* ✅ ส่ง Props ข้อมูลจริงเข้าไปที่นี่ */}
-                        <div className="col-span-3 flex flex-col gap-6 h-full">
-                            <div className="h-[55%]"><SalesChart data={SALES_HISTORY_DB} /></div> {/* ใช้ billHistory ถ้าอยากได้ Realtime */}
-                            <div className="h-[45%]"><ServiceQueue data={appointments} /></div>
-                        </div>
-                        <div className="col-span-3 flex flex-col gap-6 h-full">
-                            <div className="h-[55%]"><OrderList data={products} /></div>
-                            <div className="h-[45%]"><MessageBox data={SALES_HISTORY_DB} /></div>
-                        </div>
-                        <div className="col-span-6 h-full"><MainMenuGrid onNavigate={handleNavigate} /></div>
-                    </div>
-                  </main>
-                </div>
-            );
+            // ✅ เรียกใช้ HomeScreen ใหม่
+            return <HomeScreen modules={homeModules} onNavigate={handleNavigate} onReorderModules={setHomeModules} />;
 
         case 'pos':
             return (
@@ -3237,22 +3464,29 @@ const App = () => {
 		case 'settings':
             return (
                 <div className="h-screen w-full bg-[#F9FAFB] flex overflow-hidden">
-                    <SettingsSidebar onOpenDrawer={() => setIsDrawerOpen(true)} onNavigate={handleNavigate} activePage="general" onChangePage={()=>{}} />
+                    {/* 1. ใส่ SettingsSidebar ไว้ด้านซ้าย */}
+                    <SettingsSidebar 
+                        onOpenDrawer={() => setIsDrawerOpen(true)} 
+                        onNavigate={handleNavigate} 
+                        activePage="general" 
+                        onChangePage={() => {}} 
+                    />
+                    
+                    {/* 2. สร้างพื้นที่ด้านขวาสำหรับเนื้อหา */}
                     <div className="flex-1 flex flex-col min-w-0">
-                        <header className="h-16 bg-white border-b border-gray-100 px-6 flex items-center justify-between shrink-0"><h1 className={`${FONTS.header} text-xl font-bold text-gray-800`}>ตั้งค่าทั่วไป</h1></header>
-                        <div className="p-8">
-                            <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-200 mb-6">
-                                <h3 className="font-bold text-lg mb-4">ข้อมูลร้านค้า</h3>
-                                <div className="grid grid-cols-2 gap-4">
-                                    <div><label className="block text-sm font-bold text-gray-700 mb-1">ชื่อร้าน</label><input type="text" value={settings.shopName} onChange={(e) => setSettings({...settings, shopName: e.target.value})} className="w-full border rounded-lg p-2" /></div>
-                                    <div><label className="block text-sm font-bold text-gray-700 mb-1">สาขา</label><input type="text" value={settings.branch} onChange={(e) => setSettings({...settings, branch: e.target.value})} className="w-full border rounded-lg p-2" /></div>
-                                </div>
-                            </div>
-                        </div>
+                        
+                        {/* (Option) ใส่ Header ตรงนี้ก็ได้ถ้า SettingsView ไม่มี Header */}
+                        
+                        {/* 3. เรียกใช้ SettingsView (เนื้อหา) */}
+                        <SettingsView 
+                            settings={settings} 
+                            setSettings={setSettings} 
+                            onBack={() => handleNavigate('home')} 
+                        />
                     </div>
                 </div>
             );
-        default:
+		default:
             const modules = {
               dashboard: { title: 'Dashboard Analytics', icon: LayoutDashboard },
               promo: { title: 'จัดการโปรโมชั่น', icon: Tag },
@@ -3295,7 +3529,7 @@ const App = () => {
       {currentView !== 'home' && (
         <button
           onClick={() => handleNavigate('home')}
-          className="fixed bottom-6 right-6 theme.sidebar.bg hover:bg-gray-800 text-white p-4 rounded-full shadow-[0_8px_30px_rgb(0,0,0,0.3)] z-50 transition-all duration-300 border-2 border-[#FCD34D] hover:scale-110 active:scale-95 group flex items-center gap-2 overflow-hidden"
+          className="fixed bottom-6 right-6 bg-[#1E1E24] hover:bg-gray-800 text-white p-4 rounded-full shadow-[0_8px_30px_rgb(0,0,0,0.3)] z-50 transition-all duration-300 border-2 border-[#FCD34D] hover:scale-110 active:scale-95 group flex items-center gap-2 overflow-hidden"
           title="กลับหน้า Home"
         >
           <Home size={24} className="text-[#FCD34D] fill-current" />
@@ -3307,3 +3541,5 @@ const App = () => {
 };
 
 export default App;
+
+
