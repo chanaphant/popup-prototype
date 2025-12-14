@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef, useMemo } from 'react';
-import { 
+import * as LucideIcons from 'lucide-react';
+const {
   // Layout & Navigation
   LayoutDashboard, Store, Calendar, CalendarDays, Users, Package, Tag, Receipt, Settings, HelpCircle,
   Home, Menu, LogOut, ChevronLeft, ChevronRight, ChevronDown, ChevronUp, ArrowLeft,
@@ -3305,3 +3306,4 @@ const App = () => {
 };
 
 export default App;
+
