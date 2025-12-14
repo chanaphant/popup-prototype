@@ -18,7 +18,7 @@ const {
   ShoppingBasket, ShoppingCart, Camera, Globe, MapPin,
   
   // Animals & Grooming
-  Dog, Cat, Rabbit, Fish, Bird, PawPrint, Scissors, Activity, HeartPulse, Hexagon,
+  Dog, Cat, Rabbit, Fish, Bird, feather, Scissors, Activity, HeartPulse, Hexagon,
   
   // Business & Data
   TrendingUp, Percent, Database, FileBarChart, FileSearch, Briefcase, SlidersHorizontal, 
@@ -36,7 +36,8 @@ const {
   Image as ImageIcon, 
   Link as LinkIcon
 } from 'lucide-react';
-
+  // replace feather as pawprint
+  
 // ==========================================
 // ZONE A: SSOT (Single Source of Truth)
 // Mock Data, Constants, and Configs
@@ -760,7 +761,7 @@ const CRMSidebar = ({ onOpenDrawer, onNavigate, activeTab, onTabChange }) => {
       { icon: Menu, label: 'เมนูหลัก', action: onOpenDrawer, id: 'menu', highlight: true },
       { icon: Bell, label: 'การแจ้งเตือน', badge: 99 },
       { icon: Users, label: 'สมาชิก', id: 'members', action: () => onTabChange('members') },
-      { icon: PawPrint, label: 'สัตว์เลี้ยง', id: 'pets', action: () => onTabChange('pets') },
+      { icon: feather, label: 'สัตว์เลี้ยง', id: 'pets', action: () => onTabChange('pets') },
       { icon: MessageCircle, label: 'Line OA', id: 'line_oa', action: () => onTabChange('line_oa') },
       { icon: Megaphone, label: 'BroadCast' },
       { icon: Settings, label: 'ตั้งค่า', id: 'settings', action: () => onTabChange('settings') },
@@ -1065,7 +1066,7 @@ const POSModule = ({ cartItems, setCartItems, currentMember, recommendedItems, h
                 </div>
                 <div className="w-72 flex flex-col gap-2 shrink-0">
                     <div className="flex flex-wrap items-start justify-start gap-2 py-1 min-h-[50px] content-start">
-                      {currentMemberPets.length > 0 ? (currentMemberPets.map((pet, i) => (<div key={i} className="flex flex-col items-center gap-1 cursor-pointer group w-[3.5rem]"><div className="relative w-10 h-10 rounded-full bg-orange-100 border-2 border-white shadow-sm flex items-center justify-center text-lg group-hover:scale-110 transition">{getPetEmoji(pet.type)}{pet.chronicDiseases && pet.chronicDiseases.length > 0 && (<div className="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full text-white text-[8px] flex items-center justify-center border border-white">!</div>)}</div><span className={`${FONTS.header} text-[10px] font-bold text-gray-600 truncate w-full text-center`}>{pet.name}</span></div>))) : (<div className="flex flex-col items-center justify-center w-full py-1 text-gray-400 opacity-50"><PawPrint size={20} className="mb-0.5"/><span className="text-[10px]">ไม่พบสัตว์เลี้ยง</span></div>)}
+                      {currentMemberPets.length > 0 ? (currentMemberPets.map((pet, i) => (<div key={i} className="flex flex-col items-center gap-1 cursor-pointer group w-[3.5rem]"><div className="relative w-10 h-10 rounded-full bg-orange-100 border-2 border-white shadow-sm flex items-center justify-center text-lg group-hover:scale-110 transition">{getPetEmoji(pet.type)}{pet.chronicDiseases && pet.chronicDiseases.length > 0 && (<div className="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full text-white text-[8px] flex items-center justify-center border border-white">!</div>)}</div><span className={`${FONTS.header} text-[10px] font-bold text-gray-600 truncate w-full text-center`}>{pet.name}</span></div>))) : (<div className="flex flex-col items-center justify-center w-full py-1 text-gray-400 opacity-50"><feather size={20} className="mb-0.5"/><span className="text-[10px]">ไม่พบสัตว์เลี้ยง</span></div>)}
                       <div className="flex flex-col items-center gap-1 cursor-pointer group w-[3.5rem]"><div className="w-10 h-10 rounded-full border-2 border-dashed border-gray-300 flex items-center justify-center text-gray-400 group-hover:border-emerald-500 group-hover:text-emerald-500 transition bg-white"><Plus size={18} /></div><span className={`${FONTS.header} text-[10px] font-bold text-gray-400`}>เพิ่ม</span></div>
                     </div>
                     <div className="bg-white p-1 rounded-xl flex shadow-sm border border-gray-100">{['ประวัติ', 'แนะนำ', 'โปรฯ'].map((tab, i) => (<button key={i} className={`flex-1 py-2 rounded-lg text-sm font-bold transition ${i === 1 ? 'bg-emerald-50 text-emerald-600' : 'text-gray-400 hover:text-gray-600'}`}>{i === 1 && <Star size={14} className="inline mr-1 mb-0.5" />}{tab}</button>))}</div>
@@ -2478,7 +2479,7 @@ const MemberDetailView = ({ member, onBack }) => {
 
                     {/* Zone 3: Pet Stats */}
                     <div className="bg-white rounded-3xl p-6 shadow-sm border border-gray-100 relative">
-                        <div className="flex justify-between items-center mb-4"><h3 className={`${FONTS.header} font-bold text-gray-800 flex items-center gap-2`}><PawPrint size={18} className="text-gray-400"/> จำนวนสัตว์เลี้ยง (ทั้งหมด)</h3>{editingSection === 'stats' ? (<div className="flex gap-2"><button onClick={() => handleSaveSection('stats')} className="text-green-600 hover:text-green-700 bg-green-50 p-1.5 rounded-lg"><Save size={16} /></button><button onClick={() => setEditingSection(null)} className="text-gray-400 hover:text-gray-600 bg-gray-50 p-1.5 rounded-lg"><X size={16} /></button></div>) : (<button onClick={() => setEditingSection('stats')} className="text-gray-400 hover:text-gray-600 transition"><Edit2 size={16} /></button>)}</div>
+                        <div className="flex justify-between items-center mb-4"><h3 className={`${FONTS.header} font-bold text-gray-800 flex items-center gap-2`}><feather size={18} className="text-gray-400"/> จำนวนสัตว์เลี้ยง (ทั้งหมด)</h3>{editingSection === 'stats' ? (<div className="flex gap-2"><button onClick={() => handleSaveSection('stats')} className="text-green-600 hover:text-green-700 bg-green-50 p-1.5 rounded-lg"><Save size={16} /></button><button onClick={() => setEditingSection(null)} className="text-gray-400 hover:text-gray-600 bg-gray-50 p-1.5 rounded-lg"><X size={16} /></button></div>) : (<button onClick={() => setEditingSection('stats')} className="text-gray-400 hover:text-gray-600 transition"><Edit2 size={16} /></button>)}</div>
                         {editingSection === 'stats' ? (
                             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 animate-in fade-in zoom-in duration-200">{PET_TYPE_CONFIG.map(type => (<div key={type.id} className="bg-gray-50 border border-gray-200 rounded-xl p-3 flex flex-col items-center gap-2"><div className="flex items-center gap-2"><span className="text-xl">{type.icon}</span><span className="text-xs font-bold text-gray-600">{type.label}</span></div><div className="flex items-center bg-white rounded-lg shadow-sm border border-gray-200"><button onClick={() => handleStatChange(type.id, -1)} className="p-2 text-gray-400 hover:text-gray-600 hover:bg-gray-50 rounded-l-lg"><Minus size={14}/></button><input type="number" className="w-12 text-center text-sm font-bold text-gray-800 outline-none" value={petStatCounts[type.id] || 0} onChange={(e) => { const val = parseInt(e.target.value) || 0; setPetStatCounts({...petStatCounts, [type.id]: val}); }}/><button onClick={() => handleStatChange(type.id, 1)} className="p-2 text-green-500 hover:text-green-700 hover:bg-green-50 rounded-r-lg"><Plus size={14}/></button></div></div>))}</div>
                         ) : (
@@ -2540,7 +2541,7 @@ const MemberDetailView = ({ member, onBack }) => {
                                     <div className="pt-4 border-t border-gray-100"><button onClick={() => setPanelMode('detail')} className="w-full py-2 border border-gray-200 rounded-lg text-gray-600 font-bold hover:bg-gray-50">กลับหน้ารายละเอียด</button></div>
                                 </div>
                             ) : (
-                                <div className="h-full flex flex-col items-center justify-center text-gray-300"><PawPrint size={64} className="mb-4 opacity-20"/><p>เลือกสัตว์เลี้ยงเพื่อดูรายละเอียด</p></div>
+                                <div className="h-full flex flex-col items-center justify-center text-gray-300"><feather size={64} className="mb-4 opacity-20"/><p>เลือกสัตว์เลี้ยงเพื่อดูรายละเอียด</p></div>
                             )}
                         </div>
                     </div>
@@ -3306,4 +3307,3 @@ const App = () => {
 };
 
 export default App;
-
