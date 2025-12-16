@@ -1,0 +1,33 @@
+# Dependencies
+/node_modules
+
+# Build output
+/dist
+/tmp
+/out
+
+# Log files
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# OS Generated files
+.DS_Store
+Thumbs.db
+
+# Environment variables
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# IDE/Editor files (Visual Studio Code, JetBrains, etc.)
+.vscode/
+.idea/
+
+# Vercel & Cache
+.vercel
+/cache

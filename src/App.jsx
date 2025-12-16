@@ -44,7 +44,7 @@ const {
   
   // Icons for Settings Upgrade (Full Set)
   Facebook, Instagram, Twitter, Linkedin, GlobeIcon,
-  Landmark, CreditCard as CreditCardIcon, Calculator, AlertOctagon, Barcode, 
+  Landmark, CreditCard as CreditCardIcon, Calculator, AlertOctagon, 
   CalendarClock, ShieldAlert, PenTool, MousePointer2, Maximize, ZoomIn, ZoomOut, 
   Eraser, RotateCcw, Palette, ArrowRightCircle, Video, FileCheck as FileCheckIcon, 
   Power as PowerIcon, Smartphone as SmartphoneIcon,
